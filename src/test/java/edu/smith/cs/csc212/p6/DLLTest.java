@@ -229,6 +229,8 @@ public class DLLTest {
 		Assert.assertEquals("A", data.getFront());
 		data.addIndex("B", 1);
 		Assert.assertEquals(2, data.size());
+		for(int i =0;i<data.size();i++)
+			System.out.println(data.getIndex(i));
 		Assert.assertEquals("A", data.getFront());
 		Assert.assertEquals("B", data.getBack());
 	}

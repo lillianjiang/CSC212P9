@@ -202,8 +202,12 @@ public class GrowableListTest {
 	public void testRemoveIndex() {
 		P6List<String> data = makeFullList();
 		Assert.assertEquals(4, data.size());
+		for(int i=0;i<data.size(); i++)
+			System.out.print(data.getIndex(i));
 		Assert.assertEquals("c", data.removeIndex(2));
 		Assert.assertEquals(3, data.size());
+		for(int i=0;i<data.size(); i++)
+			System.out.print(data.getIndex(i));
 		Assert.assertEquals("d", data.removeIndex(2));
 		Assert.assertEquals(2, data.size());
 		Assert.assertEquals("b", data.removeIndex(1));
@@ -267,11 +271,12 @@ public class GrowableListTest {
 		P6List<String> data = makeEmptyList();
 		data.getFront();
 	}
-	
+
 	@Test(expected=EmptyListError.class)
 	public void testGetBackCrash() {
 		P6List<String> data = makeEmptyList();
 		data.getBack();
+		
 	}
 	
 	@Test(expected=BadIndexError.class)

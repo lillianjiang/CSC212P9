@@ -14,11 +14,13 @@ public class FixedSizeList<T> implements P6List<T> {
 	}
 
 	@Override
+	//O(n)
 	public T removeFront() {
 		return removeIndex(0);
 	}
 
 	@Override
+	//O(1)
 	public T removeBack() {
 		if (this.size() == 0) {
 			throw new EmptyListError();
@@ -30,6 +32,7 @@ public class FixedSizeList<T> implements P6List<T> {
 	}
 
 	@Override
+	//O(n)
 	public T removeIndex(int index) {
 		if (this.size() == 0) {
 			throw new EmptyListError();
@@ -44,11 +47,13 @@ public class FixedSizeList<T> implements P6List<T> {
 	}
 
 	@Override
+	//O(n)
 	public void addFront(T item) {
 		addIndex(item, 0);		
 	}
 
 	@Override
+	//o(1)
 	public void addBack(T item) {
 		if (fill < array.length) {
 			array[fill++] = item;
@@ -58,6 +63,7 @@ public class FixedSizeList<T> implements P6List<T> {
 	}
 
 	@Override
+	//O(n)
 	public void addIndex(T item, int index) {
 		if (fill >= array.length) {
 			throw new RanOutOfSpaceError();
@@ -77,6 +83,7 @@ public class FixedSizeList<T> implements P6List<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
+	//O(1)
 	public T getIndex(int index) {
 		if (index < 0 || index >= fill) {
 			throw new BadIndexError();
@@ -84,17 +91,20 @@ public class FixedSizeList<T> implements P6List<T> {
 		return (T) this.array[index];
 	}
 
-	@Override
+	@Override 
+	//O(1)
 	public int size() {
 		return this.fill;
 	}
 
 	@Override
+	//O(1)
 	public boolean isEmpty() {
 		return this.fill == 0;
 	}
 
-	@Override
+	@Override 
+	//O(1)
 	public T getFront() {
 		if (this.isEmpty()) {
 			throw new EmptyListError();
@@ -103,47 +113,11 @@ public class FixedSizeList<T> implements P6List<T> {
 	}
 
 	@Override
+	//O(1)
 	public T getBack() {
 		if (this.isEmpty()) {
 			throw new EmptyListError();
 		}
 		return this.getIndex(this.size()-1);
-	}
-	
-	// O(n)
-	// [1,2,3,4,5,6,7].find(10)
-	public int find(T item) {
-		for (int i=0; i<fill; i++) {
-			// check each item one at a time.
-			if (item.equals(array[i])) {
-				return i;
-			}
-		}
-		// this represents not found
-		return -1;
-	}
-	
-	/**
-	 * arr = [1,2,3]
-	 * arr[2] = 4
-	 * arr = [1,2,4]
-	 * 
-	 * arr[-1] => crash
-	 * arr[10000] => crash if fill = 4
-	 * @param index
-	 * @param item
-	 */
-	public void setIndex(int index, T item) {
-		// is the index too big?
-		if (index >= fill || index < 0) {
-			throw new BadIndexError();
-		}
-		array[index] = item;
-	}
-	
-	public void swap(int i, int j) {
-		T tmp = getIndex(i);
-		setIndex(i, getIndex(j));
-		setIndex(j, tmp);
 	}
 }
